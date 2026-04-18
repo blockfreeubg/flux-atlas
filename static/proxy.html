@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Search</title>
+  <title>proxy.html</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -13,11 +13,11 @@
       margin: 0;
       padding: 0;
     }
-
+ 
     html, body {
       height: 100%;
     }
-
+ 
     body {
       font-family: 'DM Sans', sans-serif;
       display: flex;
@@ -25,33 +25,33 @@
       justify-content: center;
       min-height: 100vh;
     }
-
+ 
     .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 28px;
       width: 100%;
       max-width: 600px;
       padding: 0 20px;
       margin-top: -80px;
     }
-
+ 
     .logo-wrap {
       display: flex;
       align-items: center;
       justify-content: center;
     }
-
+ 
     .logo-wrap img {
       max-width: 300px;
       object-fit: contain;
     }
-
+ 
     .search-form {
       width: 100%;
     }
-
+ 
     .search-box {
       display: flex;
       align-items: center;
@@ -60,16 +60,16 @@
       border: 1.5px solid #000000;
       border-radius: 24px;
       padding: 0 18px;
-      background: #fbff00;
+      background: #fffb00;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
-
+ 
     .search-box:focus-within {
       border-color: #000000;
       box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
       outline: none;
     }
-
+ 
     .search-icon {
       flex-shrink: 0;
       width: 17px;
@@ -78,7 +78,7 @@
       color: #000000;
       pointer-events: none;
     }
-
+ 
     .search-input {
       flex: 1;
       border: none;
@@ -87,14 +87,14 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 16px;
       font-weight: 400;
-      color: #111;
+      color: #000000;
       caret-color: #000000;
     }
-
+ 
     .search-input::placeholder {
       color: #000000;
     }
-
+ 
     .clear-btn {
       display: none;
       align-items: center;
@@ -111,11 +111,11 @@
       border-radius: 50%;
       transition: color 0.1s;
     }
-
+ 
     .clear-btn:hover {
       color: #555;
     }
-
+ 
     .clear-btn svg {
       display: block;
     }
@@ -123,11 +123,11 @@
 </head>
 <body>
   <main class="container">
-
+ 
     <div class="logo-wrap">
       <img src="logo.png" alt="Logo" />
     </div>
-
+ 
     <form class="search-form" action="" id="search-form">
       <div class="search-box">
         <svg class="search-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -137,7 +137,7 @@
         <input
           class="search-input"
           id="search-input"
-          type="search"
+          type="text"
           placeholder="Search…"
           autocomplete="off"
           spellcheck="false"
@@ -150,32 +150,33 @@
         </button>
       </div>
     </form>
-
+ 
   </main>
-
+ 
   <script>
     const form = document.getElementById('search-form');
     const input = document.getElementById('search-input');
     const clearBtn = document.getElementById('clear-btn');
-
+ 
     input.addEventListener('input', function () {
       clearBtn.style.display = this.value.length > 0 ? 'flex' : 'none';
     });
-
+ 
     clearBtn.addEventListener('click', function () {
       input.value = '';
       clearBtn.style.display = 'none';
       input.focus();
     });
-
+ 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       const query = input.value.trim();
       if (query) {
         const slug = query.replace(/\s+/g, '');
-        window.location.href = '/atlas/' + encodeURIComponent(slug);
+        window.location.href = '/atlas/' + encodeURIComponent('http://' + slug);
       }
     });
   </script>
 </body>
 </html>
+ 
