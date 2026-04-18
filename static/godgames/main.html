@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+
+#gameGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.gameCard {
+    cursor: pointer;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.gameCard:hover {
+    transform: scale(1.05);
+}
+
+.gameCard img {
+    width: 200px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.gameTitle {
+    margin-top: 8px;
+}
+
+
+#viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: none;
+    flex-direction: column;
+}
+
+#viewer iframe {
+    flex: 1;
+    border: none;
+}
+
+#closeBtn {
+    background: rgb(0, 0, 0);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+</style>
+</head>
+
+<body>
+
+<div id="gameGrid"></div>
+
+<div id="viewer">
+    <button id="closeBtn">Close</button>
+    <iframe id="gameFrame"></iframe>
+</div>
+
+<script>
+const games = [
+    { title: "Balatro", file: "balatro.html", logo: "balatro.jpg" },
+    { title: "VM", file: "vm.html", logo: "hyper.png" }
+];
+
+const grid = document.getElementById("gameGrid");
+const viewer = document.getElementById("viewer");
+const frame = document.getElementById("gameFrame");
+
+
+games.forEach(game => {
+    const card = document.createElement("div");
+    card.className = "gameCard";
+
+    card.innerHTML = `
+        <img src="logos/${game.logo}">
+        <div class="gameTitle">${game.title}</div>
+    `;
+
+    card.onclick = () => {
+        frame.src = "gamefiles/" + game.file;
+        viewer.style.display = "flex";
+    };
+
+    grid.appendChild(card);
+});
+
+
+document.getElementById("closeBtn").onclick = () => {
+    viewer.style.display = "none";
+    frame.src = "";
+};
+</script>
+
+</body>
+</html>
